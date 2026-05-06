@@ -58,7 +58,9 @@ Publish issues in dependency order (blockers first) so you can reference real is
 <issue-template>
 ## Parent
 
-A reference to the parent issue on the issue tracker (if the source was an existing issue, otherwise omit this section).
+A reference to the parent issue on the issue tracker (if the source was an existing issue, otherwise omit this section). Use `#<number>` for issue references — never full URLs or markdown links. Example: `#42`, not `https://github.com/org/repo/issues/42` or `[#42](...)`.
+
+**Important:** The issue number will be assigned by the issue tracker when the issue is created. It may differ from any placeholder number you write while drafting. Always go back and replace placeholder references with the real tracker-assigned numbers after publishing.
 
 ## What to build
 
@@ -74,10 +76,16 @@ Avoid specific file paths or code snippets — they go stale fast. Exception: if
 
 ## Blocked by
 
-- A reference to the blocking ticket (if any)
+- A reference to the blocking ticket (if any). Use `#<number>` format — never full URLs or markdown links.
 
 Or "None - can start immediately" if no blockers.
 
+## Branch
+
+`<type>-<issue-number>-<short-slug>`
+
+Suggested branch naming convention. Replace `<issue-number>` with the actual tracker-assigned number after publishing. Types: `feat-`, `fix-`, `chore-`, `refactor-`. Example: `feat-42-user-profile-page`.
+
 </issue-template>
 
-Do NOT close or modify any parent issue.
+After publishing all issues, go back and update every `#<number>` reference with the real tracker-assigned numbers. Do NOT close or modify any parent issue.

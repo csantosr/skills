@@ -18,6 +18,10 @@ Every comment or issue posted to the issue tracker during triage **must** start 
 - [AGENT-BRIEF.md](AGENT-BRIEF.md) — how to write durable agent briefs
 - [OUT-OF-SCOPE.md](OUT-OF-SCOPE.md) — how the `.out-of-scope/` knowledge base works
 
+## Issue references
+
+Always use `#<number>` for issue references — never full URLs or markdown links. Example: `#42`, not `https://github.com/org/repo/issues/42` or `[#42](...)`. This keeps issue bodies concise and readable.
+
 ## Roles
 
 Two **category** roles:
@@ -68,7 +72,9 @@ Show counts and a one-line summary per issue. Let the maintainer pick.
 
 4. **Grill (if needed).** If the issue needs fleshing out, run a `/grill-with-docs` session.
 
-5. **Apply the outcome:**
+5. **Clarify (always).** Before finalising the state, re-read the issue and identify anything that is ambiguous, underspecified, or could be interpreted in more than one way. Ask the maintainer or reporter about each unclear point. Once they respond, update the issue body with the clarifications so no context is lost. Do not skip this step even if the issue seems clear — a quick sanity check often surfaces hidden assumptions.
+
+6. **Apply the outcome:**
    - `ready-for-agent` — post an agent brief comment ([AGENT-BRIEF.md](AGENT-BRIEF.md)).
    - `ready-for-human` — same structure as an agent brief, but note why it can't be delegated (judgment calls, external access, design decisions, manual testing).
    - `needs-info` — post triage notes (template below).
