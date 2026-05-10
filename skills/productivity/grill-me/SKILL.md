@@ -8,3 +8,5 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 Ask the questions one at a time.
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
+
+When all branches of the decision tree are resolved and you believe the interview is complete, explicitly state that the interview is finished and ask the user what they want to do next. Do not take any further action until the user specifies their next steps.
