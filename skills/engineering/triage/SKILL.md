@@ -1,11 +1,11 @@
 ---
 name: triage
-description: Triage issues through a state machine driven by triage roles. Use when user wants to create an issue, triage issues, review incoming bugs or feature requests, prepare issues for an AFK agent, or manage issue workflow.
+description: Triage issues using category, effort, and state labels. Use when user wants to create an issue, triage issues, review incoming bugs or feature requests, prepare issues for an AFK agent, or manage issue workflow.
 ---
 
 # Triage
 
-Move issues on the project issue tracker through a small state machine of triage roles.
+Move issues on the project issue tracker using triage labels across category, effort, and state.
 
 Every comment or issue posted to the issue tracker during triage **must** start with this disclaimer:
 
@@ -29,6 +29,12 @@ Two **category** roles:
 - `bug` — something is broken
 - `enhancement` — new feature or improvement
 
+Three **effort** roles:
+
+- `low-effort` — small, well-bounded work; a lighter-weight model or quick pass is likely sufficient
+- `medium-effort` — moderate implementation or investigation effort; use a capable general-purpose model
+- `high-effort` — complex, ambiguous, or cross-cutting work; use the strongest model available
+
 Five **state** roles:
 
 - `needs-triage` — maintainer needs to evaluate
@@ -37,9 +43,9 @@ Five **state** roles:
 - `ready-for-human` — needs human implementation
 - `wontfix` — will not be actioned
 
-Every triaged issue should carry exactly one category role and one state role. If state roles conflict, flag it and ask the maintainer before doing anything else.
+Every triaged issue should carry exactly one category role, one effort role, and one state role. If labels conflict within any dimension, flag it and ask the maintainer before doing anything else.
 
-These are canonical role names — the actual label strings used in the issue tracker may differ. The mapping should have been provided to you - run `/setup-matt-pocock-skills` if not.
+These are canonical label names — the actual label strings used in the issue tracker may differ. The mapping should have been provided to you - run `/setup-matt-pocock-skills` if not.
 
 State transitions: an unlabeled issue normally goes to `needs-triage` first; from there it moves to `needs-info`, `ready-for-agent`, `ready-for-human`, or `wontfix`. `needs-info` returns to `needs-triage` once the reporter replies. The maintainer can override at any time — flag transitions that look unusual and ask before proceeding.
 
@@ -66,7 +72,7 @@ Show counts and a one-line summary per issue. Let the maintainer pick.
 
 1. **Gather context.** Read the full issue (body, comments, labels, reporter, dates). Parse any prior triage notes so you don't re-ask resolved questions. Explore the codebase using the project's domain glossary, respecting ADRs in the area. Read `.out-of-scope/*.md` and surface any prior rejection that resembles this issue.
 
-2. **Recommend.** Tell the maintainer your category and state recommendation with reasoning, plus a brief codebase summary relevant to the issue. Wait for direction.
+2. **Recommend.** Tell the maintainer your category, effort, and state recommendation with reasoning, plus a brief codebase summary relevant to the issue. Wait for direction.
 
 3. **Reproduce (bugs only).** Before any grilling, attempt reproduction: read the reporter's steps, trace the relevant code, run tests or commands. Report what happened — successful repro with code path, failed repro, or insufficient detail (a strong `needs-info` signal). A confirmed repro makes a much stronger agent brief.
 
@@ -75,6 +81,7 @@ Show counts and a one-line summary per issue. Let the maintainer pick.
 5. **Clarify (always).** Before finalising the state, re-read the issue and identify anything that is ambiguous, underspecified, or could be interpreted in more than one way. Ask the maintainer or reporter about each unclear point. Once they respond, update the issue body with the clarifications so no context is lost. Do not skip this step even if the issue seems clear — a quick sanity check often surfaces hidden assumptions.
 
 6. **Apply the outcome:**
+   - Always make sure the issue has exactly one category label, one effort label, and one state label before you finish.
    - `ready-for-agent` — post an agent brief comment ([AGENT-BRIEF.md](AGENT-BRIEF.md)).
    - `ready-for-human` — same structure as an agent brief, but note why it can't be delegated (judgment calls, external access, design decisions, manual testing).
    - `needs-info` — post triage notes (template below).
